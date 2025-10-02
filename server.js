@@ -2,6 +2,7 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -30,6 +31,7 @@ function initializeDatabase() {
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
             email TEXT UNIQUE,
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
@@ -81,18 +83,65 @@ app.get('/api/users', (req, res) => {
 });
 
 // Create a new user
-app.post('/api/users', (req, res) => {
-    const { username, email } = req.body;
+app.post('/api/users', async (req, res) => {
+    const { username, password, email } = req.body;
     
-    db.run(
-        'INSERT INTO users (username, email) VALUES (?, ?)',
-        [username, email],
-        function(err) {
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Username and password are required' });
+    }
+    
+    try {
+        const passwordHash = await bcrypt.hash(password, 10);
+        
+        db.run(
+            'INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)',
+            [username, passwordHash, email],
+            function(err) {
+                if (err) {
+                    res.status(400).json({ error: err.message });
+                    return;
+                }
+                res.json({ id: this.lastID, username, email });
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ error: 'Error hashing password' });
+    }
+});
+
+// Login user
+app.post('/api/users/login', (req, res) => {
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Username and password are required' });
+    }
+    
+    db.get(
+        'SELECT * FROM users WHERE username = ?',
+        [username],
+        async (err, user) => {
             if (err) {
-                res.status(400).json({ error: err.message });
+                res.status(500).json({ error: err.message });
                 return;
             }
-            res.json({ id: this.lastID, username, email });
+            
+            if (!user) {
+                res.status(401).json({ error: 'Invalid username or password' });
+                return;
+            }
+            
+            try {
+                const isValidPassword = await bcrypt.compare(password, user.password_hash);
+                if (!isValidPassword) {
+                    res.status(401).json({ error: 'Invalid username or password' });
+                    return;
+                }
+                
+                res.json({ id: user.id, username: user.username, email: user.email });
+            } catch (error) {
+                res.status(500).json({ error: 'Error verifying password' });
+            }
         }
     );
 });

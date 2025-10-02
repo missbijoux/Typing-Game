@@ -132,3 +132,19 @@
   margin: 5px 0;
   color: #666;
 }
+
+.toggle-button {
+  background-color: #f0f0f0;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: #e0e0e0;
+}

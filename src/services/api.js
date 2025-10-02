@@ -4,13 +4,24 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
 
 class ApiService {
     // User management
-    async createUser(username, email = null) {
+    async createUser(username, password, email = null) {
         const response = await fetch(`${API_BASE_URL}/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, email }),
+            body: JSON.stringify({ username, password, email }),
+        });
+        return response.json();
+    }
+
+    async loginUser(username, password) {
+        const response = await fetch(`${API_BASE_URL}/users/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
         });
         return response.json();
     }

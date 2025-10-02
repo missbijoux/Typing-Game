@@ -33,6 +33,8 @@ const TypingGame = () => {
     const [startTime, setStartTime] = useState(null);
     const [showUserForm, setShowUserForm] = useState(true);
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
     const [stats, setStats] = useState(null);
 
     const generateRandomSentence = () => {
@@ -126,13 +128,19 @@ const TypingGame = () => {
 
     const handleUserSubmit = async (e) => {
         e.preventDefault();
-        if (username.trim()) {
+        if (username.trim() && password.trim()) {
             try {
-                const newUser = await apiService.createUser(username.trim());
-                setUser(newUser);
+                let userData;
+                if (isLogin) {
+                    userData = await apiService.loginUser(username.trim(), password);
+                } else {
+                    userData = await apiService.createUser(username.trim(), password);
+                }
+                setUser(userData);
                 setShowUserForm(false);
             } catch (error) {
-                console.error('Error creating user:', error);
+                console.error('Error with user authentication:', error);
+                alert(error.message || 'Authentication failed');
             }
         }
     };
@@ -180,18 +188,33 @@ const TypingGame = () => {
             
             {showUserForm && !user && (
                 <div className="user-form">
-                    <h2>Enter Your Name</h2>
+                    <h2>{isLogin ? 'Login' : 'Create Account'}</h2>
                     <form onSubmit={handleUserSubmit}>
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Your name..."
+                            placeholder="Username..."
+                            className="input-field"
+                            required
+                        />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password..."
                             className="input-field"
                             required
                         />
                         <button type="submit" className="start-button">
-                            Continue
+                            {isLogin ? 'Login' : 'Create Account'}
+                        </button>
+                        <button 
+                            type="button" 
+                            onClick={() => setIsLogin(!isLogin)}
+                            className="toggle-button"
+                        >
+                            {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
                         </button>
                     </form>
                 </div>
