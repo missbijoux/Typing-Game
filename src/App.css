@@ -92,3 +92,43 @@
   height: 100%;
   box-sizing: border-box;
 }
+
+/* New styles for SQLite integration */
+.user-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
+}
+
+.user-form h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.game-info {
+  background-color: #f0f8ff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #b0d4f1;
+}
+
+.stats {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+}
+
+.stats h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.stats p {
+  margin: 5px 0;
+  color: #666;
+}
