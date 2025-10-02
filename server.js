@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, 'build')));
+
 // Initialize SQLite database
 const db = new sqlite3.Database('./typing_game.db', (err) => {
     if (err) {
@@ -232,6 +235,11 @@ app.get('/api/leaderboard', (req, res) => {
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', database: 'Connected' });
+});
+
+// Serve React app for all non-API routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Start server
