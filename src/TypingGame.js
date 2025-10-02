@@ -38,11 +38,30 @@ const TypingGame = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [stats, setStats] = useState(null);
     const [showLeaderboard, setShowLeaderboard] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const saved = localStorage.getItem('darkMode');
+        return saved ? JSON.parse(saved) : false;
+    });
 
     const generateRandomSentence = () => {
         const randomIndex = Math.floor(Math.random() * sentences.length);
         setSentence(sentences[randomIndex]);
     };
+
+    const toggleDarkMode = () => {
+        const newDarkMode = !isDarkMode;
+        setIsDarkMode(newDarkMode);
+        localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
+    };
+
+    // Apply dark mode class to body
+    useEffect(() => {
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }, [isDarkMode]);
 
     const startGame = useCallback(() => {
         generateRandomSentence();
@@ -186,7 +205,16 @@ const TypingGame = () => {
 
     return (
         <div className="container">
-            <h1 className="title">Affirmations for Mistress</h1>
+            <div className="header">
+                <h1 className="title">Affirmations</h1>
+                <button 
+                    onClick={toggleDarkMode} 
+                    className="dark-mode-toggle"
+                    title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                >
+                    {isDarkMode ? '☀️' : '🌙'}
+                </button>
+            </div>
             
             {showUserForm && !user && (
                 <div className="user-form">

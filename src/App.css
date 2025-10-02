@@ -187,3 +187,252 @@
 .leaderboard-button:active {
   transform: translateY(0);
 }
+
+/* Header with Dark Mode Toggle */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dark-mode-toggle {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #e0e0e0;
+}
+
+body.dark-mode .container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .title {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .user-form {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .user-form h2 {
+  color: #ffffff;
+}
+
+body.dark-mode .input-field {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+body.dark-mode .input-field::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .input-field:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+body.dark-mode .start-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+body.dark-mode .start-button:hover {
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+body.dark-mode .toggle-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .toggle-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .game-info {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .game-info p {
+  color: #ffffff;
+}
+
+body.dark-mode .stats {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .stats h3 {
+  color: #ffffff;
+}
+
+body.dark-mode .stats p {
+  color: #e0e0e0;
+}
+
+body.dark-mode .timer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .sentence {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .input-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .game-over {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .game-over p {
+  color: #ffffff;
+}
+
+body.dark-mode .leaderboard-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+body.dark-mode .leaderboard-button:hover {
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Dark mode for leaderboard overlay */
+body.dark-mode .leaderboard-overlay {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+body.dark-mode .leaderboard-modal {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+body.dark-mode .leaderboard-header {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .leaderboard-header h2 {
+  color: #ffffff;
+}
+
+body.dark-mode .close-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+body.dark-mode .close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .leaderboard-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .leaderboard-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.dark-mode .leaderboard-item.top-three {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 193, 7, 0.2) 100%);
+  border-color: #ffd700;
+}
+
+body.dark-mode .username {
+  color: #ffffff;
+}
+
+body.dark-mode .rank {
+  color: #ffffff;
+}
+
+body.dark-mode .stats span {
+  background: rgba(102, 126, 234, 0.2);
+  color: #e0e0e0;
+}
+
+body.dark-mode .best-score {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+body.dark-mode .avg-wpm {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+body.dark-mode .sessions {
+  background: rgba(168, 85, 247, 0.2);
+  color: #a78bfa;
+}
+
+body.dark-mode .no-data p {
+  color: #ffffff;
+}
+
+body.dark-mode .loading, body.dark-mode .error {
+  color: #ffffff;
+}
+
+body.dark-mode .error {
+  color: #ff6b6b;
+}
+
+body.dark-mode .retry-button, body.dark-mode .refresh-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+body.dark-mode .retry-button:hover, body.dark-mode .refresh-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .leaderboard-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
