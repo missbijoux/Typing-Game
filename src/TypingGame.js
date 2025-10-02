@@ -1,7 +1,8 @@
 //TypingGame.js
 import React, {
     useState,
-    useEffect
+    useEffect,
+    useCallback
 } from 'react';
 import './App.css';
 
@@ -26,11 +27,22 @@ const TypingGame = () => {
     const [isGameOver, setIsGameOver] = useState(false);
     const [isGameStarted, setIsGameStarted] = useState(false);
 
+    const generateRandomSentence = () => {
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        setSentence(sentences[randomIndex]);
+    };
+
+    const startGame = useCallback(() => {
+        generateRandomSentence();
+        setTime(60);
+        setIsGameOver(false);
+    }, []);
+
     useEffect(() => {
         if (isGameStarted) {
             startGame();
         }
-    }, [isGameStarted]);
+    }, [isGameStarted, startGame]);
 
     useEffect(() => {
         if (time > 0 && !isGameOver && isGameStarted) {
@@ -43,17 +55,6 @@ const TypingGame = () => {
             setIsGameOver(true);
         }
     }, [time, isGameOver, isGameStarted]);
-
-    const startGame = () => {
-        generateRandomSentence();
-        setTime(60);
-        setIsGameOver(false);
-    };
-
-    const generateRandomSentence = () => {
-        const randomIndex = Math.floor(Math.random() * sentences.length);
-        setSentence(sentences[randomIndex]);
-    };
 
     const handleChange = (e) => {
         if (!isGameOver && isGameStarted) {
@@ -100,7 +101,7 @@ const TypingGame = () => {
             )}
             {isGameOver && (
                 <div className="game-over">
-                    <p>Try again.</p>
+                    <p>Work harder.</p>
                     <p>Your Score: {score}</p>
                 </div>
             )}

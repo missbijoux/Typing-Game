@@ -1,4 +1,7 @@
 /* App.css */
+
+
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -40,7 +43,7 @@
 .sentence {
   font-size: 1.2rem;
   margin-bottom: 20px;
-  color: #333;
+  color: #000000;
 }
 
 .input-container {
@@ -73,4 +76,19 @@
 
 .game-over:hover {
   color: #d32f2f;
+}
+
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
