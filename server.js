@@ -36,6 +36,16 @@ function initializeDatabase() {
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )
     `);
+    
+    // Add password_hash column if it doesn't exist (for existing databases)
+    db.run(`
+        ALTER TABLE users ADD COLUMN password_hash TEXT
+    `, (err) => {
+        // Ignore error if column already exists
+        if (err && !err.message.includes('duplicate column name')) {
+            console.log('Note: password_hash column may already exist');
+        }
+    });
 
     // Game sessions table
     db.run(`
@@ -287,8 +297,20 @@ app.get('/api/health', (req, res) => {
 });
 
 // Serve React app for all non-API routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// Use a regex pattern to avoid path-to-regexp issues with wildcard routes
+app.get(/^(?!\/api).*/, (req, res) => {
+    // Only serve React app if build folder exists (production)
+    const buildPath = path.join(__dirname, 'build', 'index.html');
+    const fs = require('fs');
+    
+    if (fs.existsSync(buildPath)) {
+        res.sendFile(buildPath);
+    } else {
+        res.status(404).json({ 
+            error: 'React app not built. Run "npm run build" first.',
+            message: 'This is a development server. The React app should be running on port 3000.'
+        });
+    }
 });
 
 // Start server
