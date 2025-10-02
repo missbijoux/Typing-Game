@@ -286,6 +286,7 @@ const TypingGame = () => {
                         >
                             Play Again
                         </button>
+                        <br></br>
                         <button 
                             onClick={() => setShowLeaderboard(true)} 
                             className="leaderboard-button"

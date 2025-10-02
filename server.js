@@ -293,12 +293,38 @@ app.get('/api/leaderboard', (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'OK', database: 'Connected' });
+    // Test database connection
+    db.get('SELECT 1', (err) => {
+        if (err) {
+            console.error('Health check failed - database error:', err);
+            return res.status(503).json({ 
+                status: 'ERROR', 
+                database: 'Disconnected',
+                error: err.message 
+            });
+        }
+        
+        res.json({ 
+            status: 'OK', 
+            database: 'Connected',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime()
+        });
+    });
+});
+
+// Simple health check for Railway (before React app route)
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'OK', 
+        message: 'Typing Game API is running',
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Serve React app for all non-API routes
 // Use a regex pattern to avoid path-to-regexp issues with wildcard routes
-app.get(/^(?!\/api).*/, (req, res) => {
+app.get(/^(?!\/api|\/health).*/, (req, res) => {
     // Only serve React app if build folder exists (production)
     const buildPath = path.join(__dirname, 'build', 'index.html');
     const fs = require('fs');
@@ -314,9 +340,27 @@ app.get(/^(?!\/api).*/, (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`API available at http://localhost:${PORT}/api`);
+    console.log(`Health check available at http://localhost:${PORT}/api/health`);
+});
+
+// Handle server errors
+server.on('error', (err) => {
+    console.error('Server error:', err);
+    process.exit(1);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    process.exit(1);
 });
 
 // Graceful shutdown
