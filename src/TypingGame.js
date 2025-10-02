@@ -137,7 +137,7 @@ const TypingGame = () => {
         }
     };
 
-    const loadUserStats = async () => {
+    const loadUserStats = useCallback(async () => {
         if (user) {
             try {
                 const userStats = await apiService.getUserStats(user.id);
@@ -146,9 +146,9 @@ const TypingGame = () => {
                 console.error('Error loading stats:', error);
             }
         }
-    };
+    }, [user]);
 
-    const saveGameSession = async () => {
+    const saveGameSession = useCallback(async () => {
         if (user && sessionId) {
             const wpm = sentencesCompleted > 0 ? (sentencesCompleted * 60) / (60 - time) : 0;
             const accuracy = sentencesCompleted > 0 ? (sentencesCompleted / (sentencesCompleted + 0)) * 100 : 0;
@@ -165,14 +165,14 @@ const TypingGame = () => {
                 console.error('Error saving session:', error);
             }
         }
-    };
+    }, [user, sessionId, sentencesCompleted, time, score]);
 
     useEffect(() => {
         if (isGameOver && user) {
             saveGameSession();
             loadUserStats();
         }
-    }, [isGameOver, user]);
+    }, [isGameOver, user, saveGameSession, loadUserStats]);
 
     return (
         <div className="container">
