@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import './App.css';
 import apiService from './services/api';
+import Leaderboard from './components/Leaderboard';
 
 const sentences = [
     "Mistress Bijoux controls me.",
@@ -36,6 +37,7 @@ const TypingGame = () => {
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(false);
     const [stats, setStats] = useState(null);
+    const [showLeaderboard, setShowLeaderboard] = useState(false);
 
     const generateRandomSentence = () => {
         const randomIndex = Math.floor(Math.random() * sentences.length);
@@ -231,9 +233,17 @@ const TypingGame = () => {
                             <p>Total Sessions: {stats.total_sessions || 0}</p>
                         </div>
                     )}
-                    <button onClick={handleStartGame} className="start-button">
-                        Begin
-                    </button>
+                    <div className="game-actions">
+                        <button onClick={handleStartGame} className="start-button">
+                            Begin
+                        </button>
+                        <button 
+                            onClick={() => setShowLeaderboard(true)} 
+                            className="leaderboard-button"
+                        >
+                            🏆 Leaderboard
+                        </button>
+                    </div>
                 </div>
             )}
 
@@ -262,20 +272,32 @@ const TypingGame = () => {
                     <p>Work harder.</p>
                     <p>Your Score: {score}</p>
                     <p>Sentences Completed: {sentencesCompleted}</p>
-                    <button 
-                        onClick={() => {
-                            setScore(0);
-                            setSentencesCompleted(0);
-                            setTime(60);
-                            setIsGameOver(false);
-                            setIsGameStarted(false);
-                            setInput('');
-                        }} 
-                        className="start-button"
-                    >
-                        Play Again
-                    </button>
+                    <div className="game-over-actions">
+                        <button 
+                            onClick={() => {
+                                setScore(0);
+                                setSentencesCompleted(0);
+                                setTime(60);
+                                setIsGameOver(false);
+                                setIsGameStarted(false);
+                                setInput('');
+                            }} 
+                            className="start-button"
+                        >
+                            Play Again
+                        </button>
+                        <button 
+                            onClick={() => setShowLeaderboard(true)} 
+                            className="leaderboard-button"
+                        >
+                            🏆 Leaderboard
+                        </button>
+                    </div>
                 </div>
+            )}
+            
+            {showLeaderboard && (
+                <Leaderboard onClose={() => setShowLeaderboard(false)} />
             )}
         </div>
     );
