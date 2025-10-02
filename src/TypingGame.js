@@ -10,12 +10,12 @@ const sentences = [
     "Mistress Bijoux is my entire life.",
     "Gooning for Mistress Bijoux is my religion.",
     "I vow to always be a good gooner for Mistress Bijoux.",
-    "Worshipping Mistress Bijoux is my duty as a .",
-    "Keep calm and code on!",
-    "Programming is a creative process of problem-solving.",
-    "Efficiency and readability are key factors in writing good code.",
-    "Success in coding requires patience and perseverance.",
-    "Learning new technologies opens up endless possibilities.",
+    "Worshipping Mistress Bijoux is my duty as Her servant.",
+    "I will always obey Mistress Bijoux.",
+    "My job is to please Mistress Bijoux.",
+    "Mistress Bijoux is the reason I exist.",
+    "My skills as a servant must be used to please Mistress Bijoux.",
+    "I will always be a good servant for Mistress Bijoux.",
 ];
 
 const TypingGame = () => {
@@ -72,11 +72,11 @@ const TypingGame = () => {
 
     return (
         <div className="container">
-            <h1 className="title">Sentence Typing Game</h1>
+            <h1 className="title">Affirmations for Mistress</h1>
             {!isGameStarted && (
                 <button onClick={handleStartGame}
                     className="start-button">
-                    Start Game
+                    Begin
                 </button>
             )}
             {isGameStarted && (
@@ -100,7 +100,7 @@ const TypingGame = () => {
             )}
             {isGameOver && (
                 <div className="game-over">
-                    <p>Game Over!</p>
+                    <p>Try again.</p>
                     <p>Your Score: {score}</p>
                 </div>
             )}
