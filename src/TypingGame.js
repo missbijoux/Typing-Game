@@ -265,6 +265,7 @@ const TypingGame = () => {
                         <button onClick={handleStartGame} className="start-button">
                             Begin
                         </button>
+                        <br></br>
                         <button 
                             onClick={() => setShowLeaderboard(true)} 
                             className="leaderboard-button"

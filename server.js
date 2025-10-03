@@ -315,17 +315,42 @@ app.get('/api/health', (req, res) => {
 
 // Simple health check for Railway (before React app route)
 app.get('/health', (req, res) => {
-    res.json({ 
+    res.status(200).json({ 
         status: 'OK', 
         message: 'Typing Game API is running',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        port: PORT
     });
 });
 
-// Serve React app for all non-API routes
-// Use a regex pattern to avoid path-to-regexp issues with wildcard routes
+// Root endpoint for Railway health checks
+app.get('/', (req, res) => {
+    // Check if this is a health check request (Railway)
+    if (req.headers['user-agent'] && req.headers['user-agent'].includes('Railway')) {
+        return res.status(200).json({ 
+            status: 'OK', 
+            message: 'Typing Game API is running',
+            timestamp: new Date().toISOString()
+        });
+    }
+    
+    // Serve React app for regular requests
+    const buildPath = path.join(__dirname, 'build', 'index.html');
+    const fs = require('fs');
+    
+    if (fs.existsSync(buildPath)) {
+        res.sendFile(buildPath);
+    } else {
+        res.status(404).json({ 
+            error: 'React app not built. Run "npm run build" first.',
+            message: 'This is a development server. The React app should be running on port 3000.'
+        });
+    }
+});
+
+// Serve React app for all other non-API routes
 app.get(/^(?!\/api|\/health).*/, (req, res) => {
-    // Only serve React app if build folder exists (production)
     const buildPath = path.join(__dirname, 'build', 'index.html');
     const fs = require('fs');
     
@@ -340,10 +365,12 @@ app.get(/^(?!\/api|\/health).*/, (req, res) => {
 });
 
 // Start server
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`API available at http://localhost:${PORT}/api`);
     console.log(`Health check available at http://localhost:${PORT}/api/health`);
+    console.log(`Simple health check available at http://localhost:${PORT}/health`);
+    console.log('Server is ready to accept connections');
 });
 
 // Handle server errors

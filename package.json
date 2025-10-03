@@ -18,7 +18,8 @@
     "eject": "react-scripts eject",
     "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm start\"",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "railway-start": "node start.js"
   },
   "eslintConfig": {
     "extends": [
