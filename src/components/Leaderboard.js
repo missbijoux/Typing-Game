@@ -68,8 +68,14 @@ const Leaderboard = ({ onClose }) => {
         );
     }
 
+    const handleOverlayClick = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="leaderboard-overlay">
+        <div className="leaderboard-overlay" onClick={handleOverlayClick}>
             <div className="leaderboard-modal">
                 <div className="leaderboard-header">
                     <h2>🏆 Leaderboard</h2>
