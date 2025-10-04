@@ -217,6 +217,12 @@
   margin-bottom: 20px;
 }
 
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .dark-mode-toggle {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
@@ -240,6 +246,28 @@
 
 .dark-mode-toggle:active {
   transform: scale(0.95);
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+}
+
+.logout-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.4);
+}
+
+.logout-button:active {
+  transform: translateY(0);
 }
 
 /* Dark Mode Styles */
@@ -320,6 +348,16 @@ body.dark-mode .toggle-button {
 
 body.dark-mode .toggle-button:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .logout-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+}
+
+body.dark-mode .logout-button:hover {
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.4);
 }
 
 body.dark-mode .game-info {

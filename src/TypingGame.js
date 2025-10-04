@@ -54,6 +54,22 @@ const TypingGame = () => {
         localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
     };
 
+    const handleLogout = () => {
+        setUser(null);
+        setSessionId(null);
+        setStats(null);
+        setShowUserForm(true);
+        setUsername('');
+        setPassword('');
+        setIsLogin(false);
+        setIsGameStarted(false);
+        setIsGameOver(false);
+        setScore(0);
+        setSentencesCompleted(0);
+        setInput('');
+        setSentence('');
+    };
+
     // Apply dark mode class to body
     useEffect(() => {
         if (isDarkMode) {
@@ -206,15 +222,27 @@ const TypingGame = () => {
     return (
         <div className="container">
             <div className="header">
-                <img src=" ./images/affirmationsheaderpic.png" alt="Affirmations Header Image" />
-                <h1 className="title">your Affirmations</h1>
-                <button 
-                    onClick={toggleDarkMode} 
-                    className="dark-mode-toggle"
-                    title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                >
-                    {isDarkMode ? '☀️' : '🌙'}
-                </button>
+                <img src=" ./images/affirmationsheaderpic.png" alt="Affirmations Header" />
+                {/* <h1 className="title"></h1> */}
+                <br>   </br>
+                <div className="header-buttons">
+                    {user && (
+                        <button 
+                            onClick={handleLogout} 
+                            className="logout-button"
+                            title="Logout"
+                        >
+                            🚪 Logout
+                        </button>
+                    )}
+                    <button 
+                        onClick={toggleDarkMode} 
+                        className="dark-mode-toggle"
+                        title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                    >
+                        {isDarkMode ? '☀️' : '🌙'}
+                    </button>
+                </div>
             </div>
             
             {showUserForm && !user && (
