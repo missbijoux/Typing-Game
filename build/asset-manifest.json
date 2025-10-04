@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.7d06ad83.css",
-    "main.js": "/static/js/main.437e2226.js",
+    "main.css": "/static/css/main.0a9c5635.css",
+    "main.js": "/static/js/main.29f15b03.js",
+    "static/media/affirmationswallpaper.png": "/static/media/affirmationswallpaper.e133b08cb7039e3e094a.png",
+    "static/media/Migra-Extrabold.woff2": "/static/media/Migra-Extrabold.200e69075f561d99a14b.woff2",
     "index.html": "/index.html",
-    "main.7d06ad83.css.map": "/static/css/main.7d06ad83.css.map",
-    "main.437e2226.js.map": "/static/js/main.437e2226.js.map"
+    "main.0a9c5635.css.map": "/static/css/main.0a9c5635.css.map",
+    "main.29f15b03.js.map": "/static/js/main.29f15b03.js.map"
   },
   "entrypoints": [
-    "static/css/main.7d06ad83.css",
-    "static/js/main.437e2226.js"
+    "static/css/main.0a9c5635.css",
+    "static/js/main.29f15b03.js"
   ]
 }

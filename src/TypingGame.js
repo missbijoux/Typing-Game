@@ -206,7 +206,8 @@ const TypingGame = () => {
     return (
         <div className="container">
             <div className="header">
-                <h1 className="title">Affirmations</h1>
+                <img src=" ./images/affirmationsheaderpic.png" alt="Affirmations Header Image" />
+                <h1 className="title">your Affirmations</h1>
                 <button 
                     onClick={toggleDarkMode} 
                     className="dark-mode-toggle"
