@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import './App.css';
 import apiService from './services/api';
-import Leaderboard from './components/Leaderboard';
 
 const sentences = [
     "Mistress Bijoux controls me.",
@@ -21,14 +20,13 @@ const sentences = [
     "I will always be a good servant for Mistress Bijoux.",
 ];
 
-const TypingGame = () => {
+const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
     const [sentence, setSentence] = useState('');
     const [input, setInput] = useState('');
     const [score, setScore] = useState(0);
     const [time, setTime] = useState(60);
     const [isGameOver, setIsGameOver] = useState(false);
     const [isGameStarted, setIsGameStarted] = useState(false);
-    const [user, setUser] = useState(null);
     const [sessionId, setSessionId] = useState(null);
     const [sentencesCompleted, setSentencesCompleted] = useState(0);
     const [startTime, setStartTime] = useState(null);
@@ -37,25 +35,14 @@ const TypingGame = () => {
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(false);
     const [stats, setStats] = useState(null);
-    const [showLeaderboard, setShowLeaderboard] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        const saved = localStorage.getItem('darkMode');
-        return saved ? JSON.parse(saved) : false;
-    });
 
     const generateRandomSentence = () => {
         const randomIndex = Math.floor(Math.random() * sentences.length);
         setSentence(sentences[randomIndex]);
     };
 
-    const toggleDarkMode = () => {
-        const newDarkMode = !isDarkMode;
-        setIsDarkMode(newDarkMode);
-        localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
-    };
-
+    // eslint-disable-next-line no-unused-vars
     const handleLogout = () => {
-        setUser(null);
         setSessionId(null);
         setStats(null);
         setShowUserForm(true);
@@ -68,16 +55,8 @@ const TypingGame = () => {
         setSentencesCompleted(0);
         setInput('');
         setSentence('');
+        onLogout();
     };
-
-    // Apply dark mode class to body
-    useEffect(() => {
-        if (isDarkMode) {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-    }, [isDarkMode]);
 
     const startGame = useCallback(() => {
         generateRandomSentence();
@@ -135,7 +114,7 @@ const TypingGame = () => {
             // Create user if not exists
             try {
                 const newUser = await apiService.createUser(username);
-                setUser(newUser);
+                onUserLogin(newUser);
                 setShowUserForm(false);
             } catch (error) {
                 console.error('Error creating user:', error);
@@ -173,7 +152,7 @@ const TypingGame = () => {
                 } else {
                     userData = await apiService.createUser(username.trim(), password);
                 }
-                setUser(userData);
+                onUserLogin(userData);
                 setShowUserForm(false);
             } catch (error) {
                 console.error('Error with user authentication:', error);
@@ -221,27 +200,6 @@ const TypingGame = () => {
 
     return (
         <div className="container">
-            <div className="header">
-                <header className="header-title">Affirmations</header>
-                <div className="header-buttons">
-                    {user && (
-                        <button 
-                            onClick={handleLogout} 
-                            className="logout-button"
-                            title="Logout"
-                        >
-                            🚪 Logout
-                        </button>
-                    )}
-                    <button 
-                        onClick={toggleDarkMode} 
-                        className="dark-mode-toggle"
-                        title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                    >
-                        {isDarkMode ? '☀️' : '🌙'}
-                    </button>
-                </div>
-            </div>
             
             {showUserForm && !user && (
                 <div className="user-form">
@@ -293,12 +251,6 @@ const TypingGame = () => {
                             Begin
                         </button>
                         <br></br>
-                        <button 
-                            onClick={() => setShowLeaderboard(true)} 
-                            className="leaderboard-button"
-                        >
-                            🏆 Leaderboard
-                        </button>
                     </div>
                 </div>
             )}
@@ -343,19 +295,10 @@ const TypingGame = () => {
                             Play Again
                         </button>
                         <br></br>
-                        <button 
-                            onClick={() => setShowLeaderboard(true)} 
-                            className="leaderboard-button"
-                        >
-                            🏆 Leaderboard
-                        </button>
                     </div>
                 </div>
             )}
             
-            {showLeaderboard && (
-                <Leaderboard onClose={() => setShowLeaderboard(false)} />
-            )}
         </div>
     );
 };
