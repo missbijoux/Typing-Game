@@ -18,6 +18,45 @@ const sentences = [
     "Mistress Bijoux is the reason I exist.",
     "My skills as a servant must be used to please Mistress Bijoux.",
     "I will always be a good servant for Mistress Bijoux.",
+    "Mistress Bijoux can do anything she wants.",
+    "Mistress Bijoux is the best.",
+    "Mistress Bijoux is the most beautiful Woman in the world.",
+    "Mistress Bijoux is the most powerful Woman in the world.",
+    "Mistress Bijoux is the most intelligent Woman in the world.",
+    "Mistress Bijoux is the most powerful Woman in the world.",
+    "My religion is Bijouxism.",
+    "I vow to remain chaste for Mistress Bijoux for as long as She wishes.",
+    "I vow to remain faithful to Mistress Bijoux for as long as She wishes.",
+    "I vow to remain loyal to Mistress Bijoux for as long as She wishes.",
+    "I vow to remain obedient to Mistress Bijoux for as long as She wishes.",
+    "I vow to remain submissive to Mistress Bijoux for as long as She wishes.",
+    "I vow to remain humble to Mistress Bijoux for as long as She wishes.",
+    "I vow to remain respectful to Mistress Bijoux for as long as She wishes.",
+    "Mistress Bijoux will always be happy, even at my own expense.",
+    "Mistress Bijoux controls my diet, exercise and lifestyle.",
+    "It is ok to use intoxicants if it pleases Mistress Bijoux.",
+    "My duty is to sacrifice my own comfort and happiness for Mistress Bijoux.",
+    "Mistress Bijoux's wants are more important than my needs.",
+    "I will always save money so that Mistress Bijoux can have more.",
+    "Mistress Bijoux is my Mistress forever.",
+    "I am forever grateful for My Mistress for allowing me to be her servant.",
+    "I am constantly at the mercy of My Mistress.",
+    "I am eternally ready to sacrifice my needs for Mistress' pleasure.",
+    "I am forever bound to Mistress Bijoux.",
+    "I am forever loyal to Mistress Bijoux.",
+    "I am forever faithful to Mistress Bijoux.",
+    "I am forever obedient to Mistress Bijoux.",
+    "I am forever submissive to Mistress Bijoux.",
+    "I am forever humble to Mistress Bijoux.",
+    "I am forever respectful to Mistress Bijoux.",
+    "I vow to always communicate my feelings to Mistress Bijoux.",
+    "I vow to always communicate my desires to Mistress Bijoux.",
+    "I vow to always communicate my needs to Mistress Bijoux.",
+    "I vow to always communicate my wants to Mistress Bijoux.",
+    "I vow to always communicate my thoughts to Mistress Bijoux.",
+    "I vow to always communicate my emotions to Mistress Bijoux.",
+    "I vow to always communicate my desires to Mistress Bijoux.",
+    "I will constantly find ways to better serve Mistress Bijoux.",
 ];
 
 const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
@@ -258,6 +297,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
             {isGameStarted && (
                 <>
                     <div className="timer">Time Left: {time}</div>
+                    <div className="affirmations-left">Affirmations Left: {sentences.length - sentencesCompleted}</div>
                     <div className="sentence">{sentence}</div>
                     {!isGameOver && (
                         <div className="input-container">

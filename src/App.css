@@ -80,6 +80,18 @@ body.dark-mode .title {
   box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
 
+.affirmations-left {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  display: inline-block;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
 .sentence {
   font-size: 1.2rem;
   margin-bottom: 20px;
@@ -468,6 +480,12 @@ body.dark-mode .timer {
   background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .affirmations-left {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.4);
 }
 
 body.dark-mode .sentence {
