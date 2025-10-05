@@ -25,10 +25,20 @@
   margin-top: 20px;
 }
 
+body.dark-mode .container {
+  background: rgba(30, 30, 30, 0.9);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .title {
   font-size: 2rem;
   margin-bottom: 20px;
   color: #333;
+}
+
+body.dark-mode .title {
+  color: #fff;
 }
 
 
@@ -124,11 +134,17 @@
 
 /* New styles for SQLite integration */
 .user-form {
-  background-color: #f9f9f9;
+  background: rgba(255, 255, 255, 0.7);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  border: 2px solid #e0e0e0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .user-form {
+  background: rgba(50, 50, 50, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-form h2 {
@@ -136,20 +152,36 @@
   margin-bottom: 15px;
 }
 
+body.dark-mode .user-form h2 {
+  color: #fff;
+}
+
 .game-info {
-  background-color: #f0f8ff;
+  background: rgba(76, 175, 80, 0.1);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  border: 2px solid #b0d4f1;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .game-info {
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.3);
 }
 
 .stats {
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.7);
   padding: 15px;
   border-radius: 8px;
   margin: 15px 0;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+body.dark-mode .stats {
+  background: rgba(50, 50, 50, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stats h3 {
@@ -157,9 +189,17 @@
   margin-bottom: 10px;
 }
 
+body.dark-mode .stats h3 {
+  color: #fff;
+}
+
 .stats p {
   margin: 5px 0;
   color: #666;
+}
+
+body.dark-mode .stats p {
+  color: #ccc;
 }
 
 .toggle-button {
@@ -232,7 +272,7 @@
 }
 
 .dark-mode-toggle {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   border: none;
   color: white;
   font-size: 24px;
@@ -244,12 +284,12 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
 
 .dark-mode-toggle:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
 }
 
 .dark-mode-toggle:active {
@@ -397,7 +437,7 @@ body.dark-mode .stats p {
 }
 
 body.dark-mode .timer {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -429,13 +469,13 @@ body.dark-mode .game-over p {
 }
 
 body.dark-mode .leaderboard-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   color: white;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
 
 body.dark-mode .leaderboard-button:hover {
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
 }
 
 /* Dark mode for leaderboard overlay */
@@ -444,7 +484,7 @@ body.dark-mode .leaderboard-overlay {
 }
 
 body.dark-mode .leaderboard-modal {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
 }
 
 body.dark-mode .leaderboard-header {
