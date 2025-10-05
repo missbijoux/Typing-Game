@@ -187,6 +187,10 @@ body.dark-mode .user-form h2 {
   margin-bottom: 20px;
   border: 1px solid rgba(76, 175, 80, 0.2);
   backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.dark-mode .game-info {
