@@ -222,7 +222,7 @@ const TypingGame = () => {
     return (
         <div className="container">
             <div className="header">
-                <img src="./images/affirmationsheaderpic2.png" alt="Affirmations Header" />                <br></br>
+                <header className="header-title">Affirmations</header>
                 <div className="header-buttons">
                     {user && (
                         <button 
@@ -269,7 +269,7 @@ const TypingGame = () => {
                         <button 
                             type="button" 
                             onClick={() => setIsLogin(!isLogin)}
-                            className="toggle-button"
+                            className="start-button"
                         >
                             {isLogin ? 'Need an account? Register' : 'Have an account? Login'}
                         </button>

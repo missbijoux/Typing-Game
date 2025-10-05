@@ -24,6 +24,17 @@
   color: #333;
 }
 
+.header-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0;
+  color: #000000;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
 .start-button {
   background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   color: white;
@@ -305,6 +316,11 @@ body.dark-mode .title {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+body.dark-mode .header-title {
+  color: #ffffff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
 body.dark-mode .user-form {
   background: rgba(255, 255, 255, 0.08);
   border: 2px solid rgba(255, 255, 255, 0.1);
@@ -334,6 +350,7 @@ body.dark-mode .start-button {
   color: white;
   border: none;
   box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+
 }
 
 body.dark-mode .start-button:hover {
