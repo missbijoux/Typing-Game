@@ -236,7 +236,7 @@ body.dark-mode .stats p {
 }
 
 .leaderboard-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -245,12 +245,12 @@ body.dark-mode .stats p {
   font-size: 16px;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
 
 .leaderboard-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
 }
 
 .leaderboard-button:active {
@@ -378,20 +378,20 @@ body.dark-mode .input-field::placeholder {
 }
 
 body.dark-mode .input-field:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
 }
 
 body.dark-mode .start-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
   color: white;
   border: none;
-  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 
 }
 
 body.dark-mode .start-button:hover {
-  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
 }
 
 body.dark-mode .toggle-button {
@@ -528,7 +528,7 @@ body.dark-mode .rank {
 }
 
 body.dark-mode .stats span {
-  background: rgba(102, 126, 234, 0.2);
+  background: rgba(76, 175, 80, 0.2);
   color: #e0e0e0;
 }
 
