@@ -315,23 +315,46 @@ app.get('/api/health', (req, res) => {
 
 // Simple health check for Railway (before React app route)
 app.get('/health', (req, res) => {
+    console.log('Health check requested');
     res.status(200).json({ 
         status: 'OK', 
         message: 'Typing Game API is running',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
-        port: PORT
+        port: PORT,
+        env: process.env.NODE_ENV || 'development'
+    });
+});
+
+// Additional health check endpoint for Railway
+app.get('/api/health', (req, res) => {
+    console.log('API health check requested');
+    res.status(200).json({ 
+        status: 'OK', 
+        message: 'API is healthy',
+        timestamp: new Date().toISOString()
     });
 });
 
 // Root endpoint for Railway health checks
 app.get('/', (req, res) => {
-    // Check if this is a health check request (Railway)
-    if (req.headers['user-agent'] && req.headers['user-agent'].includes('Railway')) {
+    console.log('Root endpoint hit - User-Agent:', req.headers['user-agent']);
+    
+    // Check if this is a health check request (Railway or any health check)
+    const userAgent = req.headers['user-agent'] || '';
+    const isHealthCheck = userAgent.includes('Railway') || 
+                         userAgent.includes('health') || 
+                         userAgent.includes('curl') ||
+                         req.query.health === 'true';
+    
+    if (isHealthCheck) {
+        console.log('Health check detected, returning JSON');
         return res.status(200).json({ 
             status: 'OK', 
             message: 'Typing Game API is running',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            port: PORT
         });
     }
     
@@ -340,8 +363,10 @@ app.get('/', (req, res) => {
     const fs = require('fs');
     
     if (fs.existsSync(buildPath)) {
+        console.log('Serving React app');
         res.sendFile(buildPath);
     } else {
+        console.log('React app not found, returning error');
         res.status(404).json({ 
             error: 'React app not built. Run "npm run build" first.',
             message: 'This is a development server. The React app should be running on port 3000.'
