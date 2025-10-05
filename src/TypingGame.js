@@ -222,9 +222,7 @@ const TypingGame = () => {
     return (
         <div className="container">
             <div className="header">
-                <img src=" ./images/affirmationsheaderpic.png" alt="Affirmations Header" />
-                {/* <h1 className="title"></h1> */}
-                <br>   </br>
+                <img src="./images/affirmationsheaderpic2.png" alt="Affirmations Header" />                <br></br>
                 <div className="header-buttons">
                     {user && (
                         <button 
