@@ -9,7 +9,7 @@
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   padding: 40px 20px;
@@ -176,6 +176,10 @@ body.dark-mode .title {
   margin-bottom: 20px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body.dark-mode .user-form {
@@ -200,7 +204,7 @@ body.dark-mode .user-form h2 {
   border: 1px solid rgba(76, 175, 80, 0.2);
   backdrop-filter: blur(10px);
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
