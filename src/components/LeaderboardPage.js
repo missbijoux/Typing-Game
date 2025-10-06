@@ -59,7 +59,7 @@ const LeaderboardPage = ({ isDarkMode }) => {
             <div className="leaderboard-container">
                 <div className="leaderboard-header">
                     <h1>🏆 Leaderboard</h1>
-                    <p>Top performers in the typing game</p>
+                    <p>Top affirmation performers`</p>
                 </div>
 
                 {leaderboard.length === 0 ? (

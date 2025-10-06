@@ -9,11 +9,12 @@
 }
 
 .container {
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin: 0 auto;
   text-align: center;
-  padding: 40px 20px;
-  min-height: calc(100vh - 70px);
+  padding: 50px 25px;
+  min-height: calc(60vh - 70px);
+  min-width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,25 +112,27 @@ body.dark-mode .title {
 
 .input-container {
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.575);
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .input-field {
-  padding: 10px;
+  padding: 20px 15px;
   width: 100%;
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid #ccc;
   transition: border-color 0.3s ease;
+  font-size: 16px;
+  min-height: 50px;
 }
 
 .input-field:focus {
-  border-color: #4CAF50;
+ border-color: #4CAF50;
 }
 
 .game-over {
@@ -159,7 +162,7 @@ body.dark-mode .title {
   justify-content: center;
   align-items: center;
   background-color: #333;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -287,7 +290,6 @@ body.dark-mode .stats p {
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 500;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
 }
@@ -513,8 +515,8 @@ body.dark-mode .sentence {
 }
 
 body.dark-mode .input-container {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 body.dark-mode .game-over {
