@@ -130,7 +130,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                 setScore(newScore);
                 setSentencesCompleted(newSentencesCompleted);
                 setInput('');
-                
+
                 // Save sentence attempt to database
                 if (sessionId) {
                     const timeTaken = Date.now() - startTime;
@@ -142,7 +142,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                         timeTaken
                     );
                 }
-                
+
                 generateRandomSentence();
             }
         }
@@ -160,10 +160,10 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                 return;
             }
         }
-        
+
         setIsGameStarted(true);
         setStartTime(Date.now());
-        
+
         // Create game session
         if (user) {
             try {
@@ -215,7 +215,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
         if (user && sessionId) {
             const wpm = sentencesCompleted > 0 ? (sentencesCompleted * 60) / (60 - time) : 0;
             const accuracy = sentencesCompleted > 0 ? (sentencesCompleted / (sentencesCompleted + 0)) * 100 : 0;
-            
+
             try {
                 await apiService.createGameSession(user.id, {
                     score,
@@ -239,7 +239,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
 
     return (
         <div className="container">
-            
+
             {showUserForm && !user && (
                 <div className="user-form">
                     <h2>{isLogin ? 'Login' : 'Create Account'}</h2>
@@ -263,8 +263,8 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                         <button type="submit" className="start-button">
                             {isLogin ? 'Login' : 'Create Account'}
                         </button>
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             onClick={() => setIsLogin(!isLogin)}
                             className="start-button"
                         >
@@ -275,6 +275,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
             )}
 
             {user && !isGameStarted && (
+            <img src="images/rosaryemoji500.png" alt="Bijoux" className="bijoux-image" />
                 <div className="game-info">
                     <p>Welcome, {user.username}!</p>
                     {stats && (
@@ -314,14 +315,14 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                     )}
                 </>
             )}
-            
+
             {isGameOver && (
                 <div className="game-over">
                     <p>Work harder.</p>
                     <p>Your Score: {score}</p>
                     <p>Sentences Completed: {sentencesCompleted}</p>
                     <div className="game-over-actions">
-                        <button 
+                        <button
                             onClick={() => {
                                 setScore(0);
                                 setSentencesCompleted(0);
@@ -329,7 +330,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                                 setIsGameOver(false);
                                 setIsGameStarted(false);
                                 setInput('');
-                            }} 
+                            }}
                             className="start-button"
                         >
                             Play Again
@@ -338,7 +339,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                     </div>
                 </div>
             )}
-            
+
         </div>
     );
 };
