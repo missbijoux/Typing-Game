@@ -191,6 +191,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                 } else {
                     userData = await apiService.createUser(username.trim(), password);
                 }
+                console.log('User data received:', userData);
                 onUserLogin(userData);
                 setShowUserForm(false);
             } catch (error) {
@@ -275,7 +276,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
 
             {user && !isGameStarted && (
                 <div className="game-info">
-                    <p>Welcome, {user.username}!</p>
+                    <p>Welcome, {user.username || 'User'}!</p>
                     {stats && (
                         <div className="stats">
                             <h3>Your Statistics:</h3>
