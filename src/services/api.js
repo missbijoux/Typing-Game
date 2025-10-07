@@ -5,6 +5,7 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
 class ApiService {
     // User management
     async createUser(username, password, email = null) {
+        console.log('API: Creating user with URL:', `${API_BASE_URL}/users`);
         const response = await fetch(`${API_BASE_URL}/users`, {
             method: 'POST',
             headers: {
@@ -12,10 +13,22 @@ class ApiService {
             },
             body: JSON.stringify({ username, password, email }),
         });
-        return response.json();
+        
+        console.log('API: Create user response status:', response.status);
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+            console.error('API: Create user error:', errorData);
+            throw new Error(errorData.error || `HTTP ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('API: Create user success:', result);
+        return result;
     }
 
     async loginUser(username, password) {
+        console.log('API: Logging in user with URL:', `${API_BASE_URL}/users/login`);
         const response = await fetch(`${API_BASE_URL}/users/login`, {
             method: 'POST',
             headers: {
@@ -23,7 +36,18 @@ class ApiService {
             },
             body: JSON.stringify({ username, password }),
         });
-        return response.json();
+        
+        console.log('API: Login response status:', response.status);
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+            console.error('API: Login error:', errorData);
+            throw new Error(errorData.error || `HTTP ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('API: Login success:', result);
+        return result;
     }
 
     async getUser(id) {
@@ -86,8 +110,20 @@ class ApiService {
     }
 
     async getLeaderboard() {
+        console.log('API: Fetching leaderboard with URL:', `${API_BASE_URL}/leaderboard`);
         const response = await fetch(`${API_BASE_URL}/leaderboard`);
-        return response.json();
+        
+        console.log('API: Leaderboard response status:', response.status);
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+            console.error('API: Leaderboard error:', errorData);
+            throw new Error(errorData.error || `HTTP ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('API: Leaderboard success:', result);
+        return result;
     }
 
     // Health check
