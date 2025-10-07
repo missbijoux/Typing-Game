@@ -101,19 +101,33 @@ app.post('/api/users', async (req, res) => {
     }
     
     try {
-        const passwordHash = await bcrypt.hash(password, 10);
-        
-        db.run(
-            'INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)',
-            [username, passwordHash, email],
-            function(err) {
-                if (err) {
-                    res.status(400).json({ error: err.message });
-                    return;
-                }
-                res.json({ id: this.lastID, username, email });
+        // Check if username already exists
+        db.get('SELECT id FROM users WHERE username = ?', [username], (err, existingUser) => {
+            if (err) {
+                res.status(500).json({ error: 'Database error' });
+                return;
             }
-        );
+            
+            if (existingUser) {
+                res.status(400).json({ error: 'Username already exists. Please choose a different username.' });
+                return;
+            }
+            
+            // Username is available, create the user
+            const passwordHash = await bcrypt.hash(password, 10);
+            
+            db.run(
+                'INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)',
+                [username, passwordHash, email],
+                function(err) {
+                    if (err) {
+                        res.status(400).json({ error: err.message });
+                        return;
+                    }
+                    res.json({ id: this.lastID, username, email });
+                }
+            );
+        });
     } catch (error) {
         res.status(500).json({ error: 'Error hashing password' });
     }
