@@ -6,7 +6,13 @@ const Navbar = ({ currentPage, onPageChange, isDarkMode, onToggleDarkMode, user,
         <nav className={`navbar ${isDarkMode ? 'dark-mode' : ''}`}>
             <div className="navbar-container">
                 <div className="navbar-brand">
-                    <h1 className="navbar-title">Affirmations</h1>
+                    <h1 
+                        className="navbar-title clickable" 
+                        onClick={() => onPageChange('game')}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        Affirmations
+                    </h1>
                 </div>
                 
                 <div className="navbar-menu">

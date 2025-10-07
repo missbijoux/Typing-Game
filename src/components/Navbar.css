@@ -36,11 +36,29 @@
     color: #333;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.navbar-title.clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.navbar-title.clickable:hover {
+    color: #4CAF50;
+    transform: scale(1.05);
+    text-shadow: 2px 2px 8px rgba(76, 175, 80, 0.3);
 }
 
 .navbar.dark-mode .navbar-title {
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.navbar.dark-mode .navbar-title.clickable:hover {
+    color: #4CAF50;
+    transform: scale(1.05);
+    text-shadow: 2px 2px 8px rgba(76, 175, 80, 0.4);
 }
 
 .navbar-menu {
