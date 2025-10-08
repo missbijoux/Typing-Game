@@ -351,6 +351,65 @@ app.get('/api/health', (req, res) => {
 });
 
 // Root endpoint for Railway health checks
+// Database overview endpoint
+app.get('/api/db-overview', (req, res) => {
+    const overview = {
+        timestamp: new Date().toISOString(),
+        tables: {}
+    };
+
+    // Get users count
+    db.get('SELECT COUNT(*) as count FROM users', (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        overview.tables.users = { count: result.count };
+
+        // Get recent users
+        db.all('SELECT id, username, created_at FROM users ORDER BY created_at DESC LIMIT 10', (err, users) => {
+            if (err) return res.status(500).json({ error: err.message });
+            overview.tables.users.recent = users;
+
+            // Get sessions count
+            db.get('SELECT COUNT(*) as count FROM game_sessions', (err, result) => {
+                if (err) return res.status(500).json({ error: err.message });
+                overview.tables.game_sessions = { count: result.count };
+
+                // Get recent sessions
+                db.all(`SELECT s.id, u.username, s.score, s.sentences_completed, s.wpm, s.accuracy, s.created_at 
+                        FROM game_sessions s 
+                        LEFT JOIN users u ON s.user_id = u.id 
+                        ORDER BY s.created_at DESC LIMIT 20`, (err, sessions) => {
+                    if (err) return res.status(500).json({ error: err.message });
+                    overview.tables.game_sessions.recent = sessions;
+
+                    // Get leaderboard
+                    db.all(`SELECT u.username, 
+                            MAX(s.score) as best_score, 
+                            ROUND(AVG(s.wpm), 2) as avg_wpm, 
+                            COUNT(s.id) as sessions_played,
+                            MAX(s.created_at) as last_played
+                            FROM users u 
+                            LEFT JOIN game_sessions s ON u.id = s.user_id 
+                            GROUP BY u.id 
+                            ORDER BY best_score DESC`, (err, leaderboard) => {
+                        if (err) return res.status(500).json({ error: err.message });
+                        overview.leaderboard = leaderboard;
+
+                        // Get sentence attempts count
+                        db.get('SELECT COUNT(*) as count FROM sentence_attempts', (err, result) => {
+                            if (err) return res.status(500).json({ error: err.message });
+                            overview.tables.sentence_attempts = { count: result.count };
+
+                            res.json(overview);
+                        });
+                    });
+                });
+            });
+        });
+    });
+});
+
 app.get('/', (req, res) => {
     console.log('Root endpoint hit - User-Agent:', req.headers['user-agent']);
     

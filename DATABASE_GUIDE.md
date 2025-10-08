@@ -1,6 +1,6 @@
 # Database Guide
 
-This guide shows you how to view and interact with your SQLite database.
+This guide shows you how to view and interact with your SQLite database, both locally and on Railway.
 
 ## Quick Summary
 
@@ -9,6 +9,48 @@ This guide shows you how to view and interact with your SQLite database.
 - **Total game sessions**: 68+
 
 ---
+
+## 🚂 Viewing Railway Database (Production)
+
+### Method 1: Database Overview Endpoint (Easiest!)
+
+Visit this URL in your browser or use curl:
+```bash
+https://YOUR-RAILWAY-URL/api/db-overview
+```
+
+This returns a complete JSON overview with:
+- Total counts for all tables
+- Recent users (last 10)
+- Recent game sessions (last 20)
+- Full leaderboard with stats
+- Sentence attempts count
+
+### Method 2: Use Existing API Endpoints
+
+```bash
+# View all users
+https://YOUR-RAILWAY-URL/api/users
+
+# View leaderboard
+https://YOUR-RAILWAY-URL/api/leaderboard
+
+# View specific user stats (replace 2 with user ID)
+https://YOUR-RAILWAY-URL/api/users/2/stats
+
+# View user sessions
+https://YOUR-RAILWAY-URL/api/users/2/sessions
+```
+
+**Tip**: You can use these URLs in your browser or with `curl`:
+```bash
+curl https://YOUR-RAILWAY-URL/api/db-overview
+curl https://YOUR-RAILWAY-URL/api/leaderboard
+```
+
+---
+
+## 💻 Viewing Local Database
 
 ## Method 1: Interactive Script (Easiest)
 
