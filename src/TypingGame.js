@@ -73,6 +73,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLogin, setIsLogin] = useState(false);
+    const [showCelebration, setShowCelebration] = useState(false);
     const [stats, setStats] = useState(null);
 
     const generateRandomSentence = () => {
@@ -121,6 +122,12 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
         }
     }, [time, isGameOver, isGameStarted]);
 
+    const triggerCelebration = () => {
+        setShowCelebration(true);
+        // Reset celebration after animation completes
+        setTimeout(() => setShowCelebration(false), 800);
+    };
+
     const handleChange = (e) => {
         if (!isGameOver && isGameStarted) {
             setInput(e.target.value);
@@ -130,6 +137,9 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                 setScore(newScore);
                 setSentencesCompleted(newSentencesCompleted);
                 setInput('');
+
+                // Trigger celebration effects!
+                triggerCelebration();
 
                 // Save sentence attempt to database
                 if (sessionId) {
@@ -239,7 +249,8 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
     }, [isGameOver, user, saveGameSession, loadUserStats]);
 
     return (
-        <div className="container">
+        <div className={`container ${showCelebration ? 'shake' : ''}`}>
+            {showCelebration && <div className="confetti-container"></div>}
             {showUserForm && !user && (
                 <div className="user-form">
                     <h2>{isLogin ? 'Login' : 'Create Account'}</h2>

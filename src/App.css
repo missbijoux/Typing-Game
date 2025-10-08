@@ -13,12 +13,13 @@
   margin: 0 auto;
   text-align: center;
   padding: 50px 25px;
-  min-height: calc(60vh - 70px);
-  min-width: 700px;
+  min-height: calc(30vh - 70px);
+  min-width: 750px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
+  /* background: rgba(255, 255, 255, 0.9); */
+  /* background-image: url('./images/affirmationswallpaper.png'); */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
@@ -631,4 +632,93 @@ body.dark-mode .retry-button:hover, body.dark-mode .refresh-button:hover {
 
 body.dark-mode .leaderboard-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Celebration Effects */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.container.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-container::before,
+.confetti-container::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(45deg, #4CAF50, #8BC34A, #CDDC39, #FFEB3B);
+  animation: confetti-fall 0.8s ease-out forwards;
+}
+
+.confetti-container::before {
+  left: 20%;
+  animation-delay: 0s;
+  background: #4CAF50;
+}
+
+.confetti-container::after {
+  left: 80%;
+  animation-delay: 0.1s;
+  background: #FFEB3B;
+}
+
+@keyframes confetti-fall {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    transform: translateX(100px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Multiple confetti pieces using nth-child-like technique */
+.confetti-container {
+  background: 
+    radial-gradient(circle at 10% -10%, #4CAF50 0%, transparent 20%),
+    radial-gradient(circle at 30% -10%, #8BC34A 0%, transparent 20%),
+    radial-gradient(circle at 50% -10%, #CDDC39 0%, transparent 20%),
+    radial-gradient(circle at 70% -10%, #FFEB3B 0%, transparent 20%),
+    radial-gradient(circle at 90% -10%, #FF9800 0%, transparent 20%);
+  animation: confetti-burst 0.8s ease-out;
+}
+
+@keyframes confetti-burst {
+  0% {
+    background-position: 
+      10% -10%,
+      30% -10%,
+      50% -10%,
+      70% -10%,
+      90% -10%;
+    opacity: 1;
+  }
+  100% {
+    background-position: 
+      5% 120%,
+      25% 110%,
+      50% 115%,
+      75% 120%,
+      95% 110%;
+    opacity: 0;
+  }
 }
