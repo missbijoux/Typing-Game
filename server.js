@@ -7,6 +7,16 @@ const bcrypt = require('bcrypt');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Utility function to sanitize username (hide email domains)
+function sanitizeUsername(username) {
+    if (!username) return 'Anonymous';
+    // If username contains @, only show the part before @
+    if (username.includes('@')) {
+        return username.split('@')[0];
+    }
+    return username;
+}
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -301,7 +311,12 @@ app.get('/api/leaderboard', (req, res) => {
             res.status(500).json({ error: err.message });
             return;
         }
-        res.json(rows);
+        // Sanitize usernames before sending
+        const sanitizedRows = rows.map(row => ({
+            ...row,
+            username: sanitizeUsername(row.username)
+        }));
+        res.json(sanitizedRows);
     });
 });
 
