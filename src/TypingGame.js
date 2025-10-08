@@ -7,6 +7,16 @@ import React, {
 import './App.css';
 import apiService from './services/api';
 
+// Utility function to sanitize username (hide email domains)
+const sanitizeUsername = (username) => {
+    if (!username) return 'User';
+    // If username contains @, only show the part before @
+    if (username.includes('@')) {
+        return username.split('@')[0];
+    }
+    return username;
+};
+
 const sentences = [
     "Mistress Bijoux controls me.",
     "Mistress Bijoux is my entire life.",
@@ -278,7 +288,7 @@ const TypingGame = ({ isDarkMode, onUserLogin, user, onLogout }) => {
                 <div className="game-info">
                     <center>
                 <header>Affirmations.</header>
-                <p>Welcome, {user.username || 'User'}!</p>
+                <p>Welcome, {sanitizeUsername(user.username)}!</p>
                     </center>
                     {stats && (
                         <div className="stats">

@@ -7,6 +7,16 @@ const LeaderboardPage = ({ isDarkMode }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Sanitize username to hide email domains
+    const sanitizeUsername = (username) => {
+        if (!username) return 'Anonymous';
+        // If username contains @, only show the part before @
+        if (username.includes('@')) {
+            return username.split('@')[0];
+        }
+        return username;
+    };
+
     useEffect(() => {
         fetchLeaderboard();
     }, []);
@@ -106,7 +116,7 @@ const LeaderboardPage = ({ isDarkMode }) => {
                                         {index > 2 && `#${index + 1}`}
                                     </div>
                                     <div className="username-col">
-                                        <span className="username">{player.username}</span>
+                                        <span className="username">{sanitizeUsername(player.username)}</span>
                                     </div>
                                     <div className="score-col">
                                         <span className="score">{player.best_score || 0}</span>
