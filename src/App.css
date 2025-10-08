@@ -14,7 +14,7 @@
   text-align: center;
   padding: 50px 25px;
   min-height: calc(60vh - 70px);
-  /* min-width: 800px; */
+  min-width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
