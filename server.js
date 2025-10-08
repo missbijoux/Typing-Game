@@ -297,6 +297,7 @@ app.get('/api/leaderboard', (req, res) => {
         SELECT 
             u.username,
             MAX(gs.score) as best_score,
+            MAX(gs.wpm) as best_wpm,
             AVG(gs.wpm) as avg_wpm,
             COUNT(gs.id) as sessions_played
         FROM users u
@@ -400,7 +401,8 @@ app.get('/api/db-overview', (req, res) => {
 
                     // Get leaderboard
                     db.all(`SELECT u.username, 
-                            MAX(s.score) as best_score, 
+                            MAX(s.score) as best_score,
+                            MAX(s.wpm) as best_wpm,
                             ROUND(AVG(s.wpm), 2) as avg_wpm, 
                             COUNT(s.id) as sessions_played,
                             MAX(s.created_at) as last_played
