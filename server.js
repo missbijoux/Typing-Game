@@ -112,7 +112,7 @@ app.post('/api/users', async (req, res) => {
     
     try {
         // Check if username already exists
-        db.get('SELECT id FROM users WHERE username = ?', [username], (err, existingUser) => {
+        db.get('SELECT id FROM users WHERE username = ?', [username], async (err, existingUser) => {
             if (err) {
                 res.status(500).json({ error: 'Database error' });
                 return;
@@ -124,22 +124,26 @@ app.post('/api/users', async (req, res) => {
             }
             
             // Username is available, create the user
-            const passwordHash = await bcrypt.hash(password, 10);
-            
-            db.run(
-                'INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)',
-                [username, passwordHash, email],
-                function(err) {
-                    if (err) {
-                        res.status(400).json({ error: err.message });
-                        return;
+            try {
+                const passwordHash = await bcrypt.hash(password, 10);
+                
+                db.run(
+                    'INSERT INTO users (username, password_hash, email) VALUES (?, ?, ?)',
+                    [username, passwordHash, email],
+                    function(err) {
+                        if (err) {
+                            res.status(400).json({ error: err.message });
+                            return;
+                        }
+                        res.json({ id: this.lastID, username, email });
                     }
-                    res.json({ id: this.lastID, username, email });
-                }
-            );
+                );
+            } catch (hashError) {
+                res.status(500).json({ error: 'Error hashing password' });
+            }
         });
     } catch (error) {
-        res.status(500).json({ error: 'Error hashing password' });
+        res.status(500).json({ error: 'Error creating user' });
     }
 });
 
